@@ -1,0 +1,73 @@
+Mon Dec 19 14:56:45 CET 2011  [debug] AvalonLogSystem initialized using logfile 'velocity.log'
+Mon Dec 19 14:56:45 CET 2011   [info] ************************************************************** 
+Mon Dec 19 14:56:45 CET 2011   [info] Starting Jakarta Velocity v1.3.1
+Mon Dec 19 14:56:45 CET 2011   [info] RuntimeInstance initializing.
+Mon Dec 19 14:56:45 CET 2011   [info] Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+Mon Dec 19 14:56:45 CET 2011   [info] Trying to use logger class org.apache.velocity.runtime.log.AvalonLogSystem
+Mon Dec 19 14:56:45 CET 2011   [info] Using logger class org.apache.velocity.runtime.log.AvalonLogSystem
+Mon Dec 19 14:56:45 CET 2011   [info] Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+Mon Dec 19 14:56:45 CET 2011   [warn] ResourceManager : No configuration information for resource loader named 'class'. Skipping.
+Mon Dec 19 14:56:45 CET 2011   [info] Resource Loader Instantiated: org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [info] FileResourceLoader : initialization starting.
+Mon Dec 19 14:56:45 CET 2011   [info] FileResourceLoader : adding path '.'
+Mon Dec 19 14:56:45 CET 2011   [info] FileResourceLoader : adding path 'D:\PROJECTS\ATAC\EXTENDED/../resources/antdoc_templates'
+Mon Dec 19 14:56:45 CET 2011   [info] FileResourceLoader : initialization complete.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceCache : initialized. (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+Mon Dec 19 14:56:45 CET 2011   [info] Default ResourceManager initialization complete.
+Mon Dec 19 14:56:45 CET 2011   [info] Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+Mon Dec 19 14:56:45 CET 2011   [info] Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+Mon Dec 19 14:56:45 CET 2011   [info] Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+Mon Dec 19 14:56:45 CET 2011   [info] Loaded System Directive: org.apache.velocity.runtime.directive.Include
+Mon Dec 19 14:56:45 CET 2011   [info] Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+Mon Dec 19 14:56:45 CET 2011   [info] Created: 20 parsers.
+Mon Dec 19 14:56:45 CET 2011   [info] Velocimacro : initialization starting.
+Mon Dec 19 14:56:45 CET 2011   [info] Velocimacro : adding VMs from VM library template : VM_global_library.vm
+Mon Dec 19 14:56:45 CET 2011  [error] ResourceManager : unable to find resource 'VM_global_library.vm' in any resource loader.
+Mon Dec 19 14:56:45 CET 2011   [info] Velocimacro : error using  VM library template VM_global_library.vm : org.apache.velocity.exception.ResourceNotFoundException: Unable to find resource 'VM_global_library.vm'
+Mon Dec 19 14:56:45 CET 2011   [info] Velocimacro :  VM library template macro registration complete.
+Mon Dec 19 14:56:45 CET 2011   [info] Velocimacro : allowInline = true : VMs can be defined inline in templates
+Mon Dec 19 14:56:45 CET 2011   [info] Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+Mon Dec 19 14:56:45 CET 2011   [info] Velocimacro : allowInlineLocal = false : VMs defined inline will be  global in scope if allowed.
+Mon Dec 19 14:56:45 CET 2011   [info] Velocimacro : messages on  : VM system will output logging messages
+Mon Dec 19 14:56:45 CET 2011   [info] Velocimacro : autoload off  : VM system will not automatically reload global library macros
+Mon Dec 19 14:56:45 CET 2011   [info] Velocimacro : initialization complete.
+Mon Dec 19 14:56:45 CET 2011   [info] Velocity successfully started.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/main.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $antroot is an Iterator in the #foreach() loop at [16,1] in template html/main.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/task.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $taskDoc is an Enumeration in the #foreach() loop at [76,1] in template html/task.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/task.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $taskDoc is an Enumeration in the #foreach() loop at [76,1] in template html/task.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/task.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $taskDoc is an Enumeration in the #foreach() loop at [76,1] in template html/task.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/task.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $taskDoc is an Enumeration in the #foreach() loop at [76,1] in template html/task.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/task.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $taskDoc is an Iterator in the #foreach() loop at [76,1] in template html/task.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/task.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $taskDoc is an Enumeration in the #foreach() loop at [76,1] in template html/task.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/task.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] org.apache.velocity.runtime.exception.ReferenceException: reference : template = html/task.vm [line 20,column 27] : $taskDoc.getAntCategory() is not a valid reference.
+Mon Dec 19 14:56:45 CET 2011   [warn] org.apache.velocity.runtime.exception.ReferenceException: reference : template = html/task.vm [line 25,column 9] : $taskDoc.getShortComment() is not a valid reference.
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $taskDoc is an Enumeration in the #foreach() loop at [76,1] in template html/task.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/task.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] org.apache.velocity.runtime.exception.ReferenceException: reference : template = html/task.vm [line 20,column 27] : $taskDoc.getAntCategory() is not a valid reference.
+Mon Dec 19 14:56:45 CET 2011   [warn] org.apache.velocity.runtime.exception.ReferenceException: reference : template = html/task.vm [line 25,column 9] : $taskDoc.getShortComment() is not a valid reference.
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $taskDoc is an Enumeration in the #foreach() loop at [76,1] in template html/task.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/task.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] org.apache.velocity.runtime.exception.ReferenceException: reference : template = html/task.vm [line 20,column 27] : $taskDoc.getAntCategory() is not a valid reference.
+Mon Dec 19 14:56:45 CET 2011   [warn] org.apache.velocity.runtime.exception.ReferenceException: reference : template = html/task.vm [line 25,column 9] : $taskDoc.getShortComment() is not a valid reference.
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $taskDoc is an Enumeration in the #foreach() loop at [76,1] in template html/task.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/libindex.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $antroot is an Iterator in the #foreach() loop at [26,1] in template html/libindex.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/overview.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $antroot is an Iterator in the #foreach() loop at [31,1] in template html/main.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/taskindex.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $antroot is an Iterator in the #foreach() loop at [25,9] in template html/taskindex.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $antroot is an Iterator in the #foreach() loop at [46,3] in template html/taskindex.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [info] ResourceManager : found html/taskindex.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $antroot is an Iterator in the #foreach() loop at [25,9] in template html/taskindex.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:45 CET 2011   [warn] Warning! The reference $antroot is an Iterator in the #foreach() loop at [46,3] in template html/taskindex.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:46 CET 2011   [info] ResourceManager : found html/taskindex.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Mon Dec 19 14:56:46 CET 2011   [warn] Warning! The reference $antroot is an Iterator in the #foreach() loop at [25,9] in template html/taskindex.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.
+Mon Dec 19 14:56:46 CET 2011   [warn] Warning! The reference $antroot is an Iterator in the #foreach() loop at [46,3] in template html/taskindex.vm. Because it's not resetable, if used in more than once, this may lead to unexpected results.

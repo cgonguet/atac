@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<BugCollection version="1.2.0" threshold="Low" effort="Max" >
+<file classname="com.alu.comm.netconf.utils.CommException" >
+<BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="Normal" category="BAD_PRACTICE" message="Nm: The method name com.alu.comm.netconf.utils.CommException.Assert(boolean, String) doesn't start with an lower case letter" lineNumber="9-10" />
+</file>
+<file classname="com.alu.comm.netconf.reactorengine.reactors.ExpectMessageStreamReactor" >
+<BugInstance type="RV_RETURN_VALUE_IGNORED" priority="Low" category="CORRECTNESS" message="RV: com.alu.comm.netconf.reactorengine.reactors.ExpectMessageStreamReactor.pushMessage(ExpectMessageStreamReactor$LinkState, String) ignores return value of java.util.Queue.offer(Object)" lineNumber="47" />
+</file>
+<file classname="com.alu.comm.netconf.layers.rpc.NotificationWaiter$NotificationWaiterThread" >
+<BugInstance type="DE_MIGHT_IGNORE" priority="Low" category="BAD_PRACTICE" message="DE: com.alu.comm.netconf.layers.rpc.NotificationWaiter$NotificationWaiterThread.run() might ignore java.lang.Exception" lineNumber="36" />
+</file>
+<file classname="com.alu.comm.netconf.layers.ssh.SshChannel" >
+<BugInstance type="DE_MIGHT_IGNORE" priority="Low" category="BAD_PRACTICE" message="DE: com.alu.comm.netconf.layers.ssh.SshChannel.getExitStatus() might ignore java.lang.Exception" lineNumber="27" />
+</file>
+<file classname="com.alu.comm.netconf.reactorengine.actors.TimeoutActor" >
+<BugInstance type="ICAST_INTEGER_MULTIPLY_CAST_TO_LONG" priority="Normal" category="STYLE" message="ICAST: Result of integer multiplication cast to long in com.alu.comm.netconf.reactorengine.actors.TimeoutActor.setTimeOut(int)" lineNumber="27" />
+</file>
+<file classname="com.alu.comm.netconf.reactorengine.reactors.QueuedMessageStreamReactor" >
+<BugInstance type="RV_RETURN_VALUE_IGNORED" priority="Low" category="CORRECTNESS" message="RV: com.alu.comm.netconf.reactorengine.reactors.QueuedMessageStreamReactor.pushMessage(String) ignores return value of java.util.Queue.offer(Object)" lineNumber="48" />
+</file>
+<file classname="com.alu.comm.netconf.io.DataEvent" >
+<BugInstance type="EI_EXPOSE_REP2" priority="Normal" category="MALICIOUS_CODE" message="EI2: com.alu.comm.netconf.io.DataEvent.DataEvent(SocketChannel, byte[]) may expose internal representation by storing an externally mutable object into DataEvent.data" lineNumber="12" />
+</file>
+<file classname="com.alu.comm.netconf.io.NioServer" >
+<BugInstance type="RV_RETURN_VALUE_IGNORED" priority="Low" category="CORRECTNESS" message="RV: com.alu.comm.netconf.io.NioServer.openLink(InetAddress, int, Worker) ignores return value of java.util.Queue.offer(Object)" lineNumber="46" />
+<BugInstance type="RV_RETURN_VALUE_IGNORED" priority="Low" category="CORRECTNESS" message="RV: com.alu.comm.netconf.io.NioServer.send(SocketChannel, byte[]) ignores return value of java.util.Queue.offer(Object)" lineNumber="70" />
+<BugInstance type="RV_RETURN_VALUE_IGNORED" priority="Low" category="CORRECTNESS" message="RV: com.alu.comm.netconf.io.NioServer.shutDown() ignores return value of java.util.Queue.offer(Object)" lineNumber="214" />
+</file>
+<file classname="com.alu.comm.netconf.mediation.ran.AttributeNode" >
+<BugInstance type="RI_REDUNDANT_INTERFACES" priority="Low" category="STYLE" message="RI: Class com.alu.comm.netconf.mediation.ran.AttributeNode implements same interface as superclass" lineNumber="Not available" />
+</file>
+<file classname="com.alu.comm.netconf.mediation.ran.RanToYangXmlActor" >
+<BugInstance type="DE_MIGHT_IGNORE" priority="Low" category="BAD_PRACTICE" message="DE: com.alu.comm.netconf.mediation.ran.RanToYangXmlActor.getWoOperation(XmlAttribute[]) might ignore java.lang.Exception" lineNumber="63" />
+</file>
+<file classname="com.alu.comm.netconf.mediation.yang.ContainerAttributesNode" >
+<BugInstance type="RI_REDUNDANT_INTERFACES" priority="Low" category="STYLE" message="RI: Class com.alu.comm.netconf.mediation.yang.ContainerAttributesNode implements same interface as superclass" lineNumber="Not available" />
+</file>
+<file classname="com.alu.comm.netconf.reactorengine.service.ReactorThread" >
+<BugInstance type="RV_RETURN_VALUE_IGNORED" priority="Low" category="CORRECTNESS" message="RV: com.alu.comm.netconf.reactorengine.service.ReactorThread.postAddActor(Actor) ignores return value of java.util.Queue.offer(Object)" lineNumber="21" />
+<BugInstance type="RV_RETURN_VALUE_IGNORED" priority="Low" category="CORRECTNESS" message="RV: com.alu.comm.netconf.reactorengine.service.ReactorThread.postRemoveActor(Actor) ignores return value of java.util.Queue.offer(Object)" lineNumber="25" />
+</file>
+<file classname="com.alu.comm.netconf.reactorengine.service.ReactorEngineServiceImpl" >
+<BugInstance type="SC_START_IN_CTOR" priority="Normal" category="MT_CORRECTNESS" message="SC: com.alu.comm.netconf.reactorengine.service.ReactorEngineServiceImpl.ReactorEngineServiceImpl() invokes com.alu.comm.netconf.reactorengine.service.ReactorThread.start()" lineNumber="12" />
+</file>
+<file classname="com.alu.comm.netconf.utils.CommMessageException" >
+<BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="Normal" category="BAD_PRACTICE" message="Nm: The method name com.alu.comm.netconf.utils.CommMessageException.Assert(boolean, String) doesn't start with an lower case letter" lineNumber="15-16" />
+<BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="Normal" category="BAD_PRACTICE" message="Nm: The method name com.alu.comm.netconf.utils.CommMessageException.Bang(String) doesn't start with an lower case letter" lineNumber="18-19" />
+</file>
+<file classname="com.alu.comm.netconf.sessionservice.SessionServiceBuilder" >
+<BugInstance type="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR" priority="Low" category="STYLE" message="UwF: SshSftpChannel.engineSvc not initialized in constructor" lineNumber="Not available" />
+<BugInstance type="URF_UNREAD_FIELD" priority="Normal" category="PERFORMANCE" message="UrF: Unread field: com.alu.comm.netconf.layers.ssh.SshSftpChannel.errorQueue" lineNumber="22" />
+<BugInstance type="URF_UNREAD_FIELD" priority="Normal" category="PERFORMANCE" message="UrF: Unread field: com.alu.comm.netconf.mediation.yang.YangToRanXmlActor.modelConfig" lineNumber="21" />
+<BugInstance type="URF_UNREAD_FIELD" priority="Normal" category="PERFORMANCE" message="UrF: Unread field: com.alu.comm.netconf.mediation.yang.YangToRanXmlActor.ranConfigNodeDn" lineNumber="20" />
+<BugInstance type="SIC_INNER_SHOULD_BE_STATIC" priority="Normal" category="PERFORMANCE" message="SIC: Should com.alu.comm.netconf.reactorengine.reactors.ExpectMessageStreamReactor$StateAndMessage be a _static_ inner class?" lineNumber="Not available" />
+</file>
+<Errors>
+</Errors>
+</BugCollection>

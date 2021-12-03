@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+
+<project name="Main Test GUI" default="Tabs" basedir="..">
+
+  <path id="atac.classpath">
+    <dirset dir="${basedir}/../classes/production/MAIN">
+      <include name="**"/>
+    </dirset>
+    <fileset dir="${basedir}/../lib">
+      <include name="ant/**.jar"/>
+      <include name="antdoclet-1.1/**.jar"/>
+      <include name="dav*.jar"/>
+      <include name="jsch*.jar"/>
+    </fileset>
+  </path>
+
+  <taskdef resource="org/atac/ant/antlib.xml" classpathref="atac.classpath"/>
+
+  <target name="Basic">
+
+    <gui title="Test GUI Aggregator" vgap="10" fontSize="16">
+      <glabel text="Welcome to GUI Aggregator !" alignment="center" fontStyle="bold-italic" fontSize="24"/>
+      <gseparator/>
+      <gintext focus="true" label="Choose a text value: " text="AAAAAAA" property="test.result.text"/>
+      <gspare/>
+      <glabel text="Right label" alignment="right"/>
+      <gspare/>
+      <glabel text="---- This is a label ---" alignment="center"/>
+      <ginfile label="Choose a file: " columns="10"
+               file="test/data/fileForEditor.txt"
+               property="test.result.file"
+               type="both" filter="jar,xml,(xml|log)"/>
+      <gseparator/>
+      <ginlist focus="true" label="choose in the list: " listing="AA,BB,CC,DD" current="BB"
+               property="test.result.list"/>
+    </gui>
+
+    <echo>
+      RESULTS:
+      Text: ${test.result.text}
+      File: ${test.result.file}
+      List: ${test.result.list}
+    </echo>
+  </target>
+
+    <target name="Specials">
+
+        <gui title="Test GUI Aggregator" fontSize="16">
+            <gintext focus="true" label="Label 1: " property="test.result.text.1"/>
+            <gintext focus="true" label="Label 2: "  property="test.result.text.2"/>
+            <ginfile label="File: "
+                      property="test.result.file"
+                     type="both"
+                     editable="true"/>
+            <ginlist focus="true" label="choose in the list: " columns="5"
+                     listing="AAAAAAAAAAAAAAAAAAAAAAAAA,BBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                     property="test.result.list"/>
+        </gui>
+
+        <echo>
+            RESULTS:
+            Text: ${test.result.text.1}
+        </echo>
+    </target>
+
+
+    <target name="Tabs">
+
+    <property name="tmp.file" value="tmp/merlin.txt"/>
+    <echo file="${tmp.file}">
+      J’ai cent ans.
+      Un siècle est une éternité à vivre et, après qu’on l’a vécu, une pensée fugitive où tout, les commencements, la
+      conscience, l’invention et l’échec, se ramasse en une expérience sans durée. Je porte le deuil d’un monde et de
+      tous ceux qui l’ont peuplé.
+      J’en suis le seul survivant.
+      Dieu lui-même se meurt et Satan ne va guère mieux.
+      Cet ancien désir d’absolu, qui m’a toujours poussé à agir, rencontre enfin dans l’inaction un objet indiscutable,
+      et c’est l’absolu de la solitude.
+    </echo>
+    <loadfile srcfile="${tmp.file}" property="file.content.before"/>
+
+    <gui title="Test with Tabs" vgap="10" fontSize="16">
+      <gtab title="Basics">
+        <glabel text="Welcome to GUI Aggregator !" alignment="center" fontStyle="bold-italic" fontSize="24"/>
+        <gseparator/>
+        <gintext label="Choose a text value: " text="AAAAAAA" property="test.result.text" />
+        <gspare/>
+        <glabel text="Right label" alignment="right"/>
+        <gspare/>
+        <glabel text="---- This is a label ---"/>
+      </gtab>
+      <gtab title="File&amp;List">
+        <ginfile label="Choose a file: "
+                 file="test/data/fileForEditor.txt" columns="20"
+                 property="test.result.file"
+                 type="both" filter="jar,xml"/>
+        <ginfile label="Choose a file (text editable): "
+                 file="test/data/fileForEditor.txt" columns="20"
+                 property="test.result.file.editable"
+                 type="both" filter="jar,xml" editable="true"/>
+        <gseparator/>
+        <ginlist focus="true" label="choose in the list: " listing="AA,BB,CC,DD" current="BB"
+                 property="test.result.list"/>
+          <ginlist focus="true" label="choose in the list: " listing="AA,BB,CC,DD" current="CC"
+                   property="test.result.list"/>
+          <ginlist focus="true" label="choose in the list: " listing="AA,BB,CC,DD" current="DD"
+                   property="test.result.list"/>
+      </gtab>
+      <gtab title="Editor">
+        <gfileeditor label="Editor for ${tmp.file}" file="${tmp.file}"
+                     focus="true"
+                     fontName="courier" fontSize="16"
+                     columns="40"/>
+      </gtab>
+    </gui>
+
+    <echo>
+      RESULTS:
+      Text: ${test.result.text}
+      File: ${test.result.file}
+            ${test.result.file.editable}
+      List: ${test.result.list}
+    </echo>
+  </target>
+
+  <target name="With File">
+
+    <property name="tmp.file" value="tmp/tmp_guiaggregator.txt"/>
+    <echo file="${tmp.file}">
+      blabla
+      CRi 00012345.89 pipotron
+      blablabla
+      CRI AZERTY
+      CRI 0123456.9087 yahoo
+      CRI 667788.0
+      CRi: 1234.123 shouldbefound
+      the end
+    </echo>
+    <loadfile srcfile="${tmp.file}" property="file.content.before"/>
+
+    <gui title="CRIs info" vgap="20" failoncancel="false" fontStyle="plain">
+      <glabel alignment="center"
+              text="Info for CRIs found in changes.xml"/>
+      <gtext text="${file.content.before}" label="This is the text" fontName="courier" rows="10"/>
+      <gintext label="Enter CRIs to deliver: "
+               text="here are the CRIs"
+               property="result"
+               focus="false"/>
+      <gfileeditor label="Editor for ${tmp.file}" file="${tmp.file}" focus="true"
+                   fontName="courier" fontSize="16"/>
+    </gui>
+    <echo>Result: ${result}</echo>
+
+    <loadfile srcfile="${tmp.file}" property="file.content.after"/>
+    <echo>The file content is:
+      ${file.content.after}
+    </echo>
+
+    <delete file="${tmp.file}"/>
+  </target>
+
+  <target name="Sequential">
+
+    <property name="log.file" value="tmp/gui.log"/>
+    <delete file="${log.file}" failonerror="false"/>
+
+    <gui title="Test with Sequential" vgap="10" fontSize="12">
+      <gtab title="Main">
+        <glabel text="Test Concat A + B" alignment="center" fontStyle="bold-italic" fontSize="24"/>
+        <gseparator/>
+        <gintext focus="true" label="Value A: " text="AAAAAAA" property="test.result.text.A"/>
+        <gspare/>
+        <gintext focus="true" label="Value B: " text="BBBBBBB" property="test.result.text.B"/>
+      </gtab>
+      <gconsole columns="40" loglevel="verbose" file="${log.file}" append="false"
+              fontStyle="plain"
+              fontName="courier">
+      <sequential>
+       <echo>Concat Text A + B = ${test.result.text.A} + ${test.result.text.B}</echo>
+        <sleep seconds="2"/>
+        <echo>Done</echo>
+      </sequential>
+      </gconsole>
+    </gui>
+
+    <echo>
+      RESULTS:
+      Text: ${test.result.text.A}
+            ${test.result.text.B}
+    </echo>
+
+    <delete file="${log.file}" failonerror="false"/>
+
+   </target>
+
+    <target name="SavedProperties">
+
+        <gui title="Test GUI Aggregator" save="test_gui.properties">
+            <glabel text="Test with saved properties" alignment="center"/>
+            <gseparator/>
+            <gintext label="Text: "
+                     text="AAAAAAA"
+                     property="test.result.text"/>
+            <ginfile label="File: "
+                     file="test/data/fileForEditor.txt"
+                     property="test.result.file"
+                     type="both" filter="jar,xml,(xml|log)"/>
+            <ginlist label="choose in the list: "
+                     listing="AA,BB,CC,DD"
+                     current="BB"
+                     property="test.result.list"/>
+            <gintext label="Text: "
+                     property="test.result.text2"/>
+            <ginfile label="File: "
+                     property="test.result.file2"
+                     type="both" filter="jar,xml,(xml|log)"/>
+        </gui>
+
+        <echo>
+            RESULTS:
+            Text: ${test.result.text}
+            File: ${test.result.file}
+            List: ${test.result.list}
+        </echo>
+    </target>
+
+</project>

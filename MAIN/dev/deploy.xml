@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<project name="Main Deploy" default="Acos: New Release" basedir="..">
+
+  <taskdef resource="org/atac/ant/antlib.xml" classpath="${basedir}/atac.jar"/>
+  <taskdef resource="org/atac/ant/antlib.xml" classpath="${basedir}/../EXTENDED/atac-extended.jar"/>
+
+  <path id="antdoclet.classpath">
+    <fileset id="libs" dir="${basedir}/../lib/antdoclet-1.1/lib">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset file="${basedir}/atac.jar"/>
+    <fileset dir="${basedir}/../lib">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <target name="Doc: Generate" description="Generate Ant Task/Types documentation">
+
+    <property name="antdoclet.templates.dir" value="${basedir}/../resources/antdoc_templates"/>
+
+    <mkdir dir="${basedir}/output/html"/>
+    <copy todir="output/html/" overwrite="true">
+      <fileset dir="${antdoclet.templates.dir}/html/">
+        <exclude name="*.vm"/>
+      </fileset>
+    </copy>
+    <copy todir="output/html/" overwrite="true">
+      <fileset dir="${basedir}/../resources/images/">
+        <include name="**/*"/>
+      </fileset>
+    </copy>
+
+    <javadoc destdir="${basedir}/output/html">
+
+      <packageset dir="src" defaultexcludes="yes">
+        <include name="org/atac/ant/**"/>
+      </packageset>
+
+      <doclet name="com.neuroning.antdoclet.AntDoclet" pathref="antdoclet.classpath">
+        <param name="-doctitle" value="ATAC"/>
+        <param name="-templatesdir" value="${antdoclet.templates.dir}"/>
+        <param name="-templates" value="html/main.vm"/>
+      </doclet>
+
+    </javadoc>
+  </target>
+
+  <target name="Doc: Publish">
+    <webdav basedir="groups/atac/">
+      <putdir local="output/html" remote="www/MAIN"/>
+    </webdav>
+  </target>
+
+  <target name="Acos: New Release">
+
+    <property file="${user.home}/private.properties"/>
+    <acosfrsget userid="${acos.username}"
+             password="${acos.password}"
+             group="atac"
+             releasepackage="atac"
+             property="last.release"
+             last="true"/>
+    <echo>
+    Last Release: ${last.release}
+    </echo>
+
+    <gui title="Create New Release" vgap="10" fontName="fixed" size="300x150">
+      <gintext focus="true" label="Version: " text="${last.release}" property="release.version"/>
+      <gintext label="Notes  : " property="release.notes"/>
+      <gintext label="Changes: " property="release.changes"/>
+    </gui>
+
+    <property file="${user.home}/private.properties"/>
+    <acosfrs userid="${acos.username}"
+             password="${acos.password}"
+             group="atac"
+             releasepackage="atac"
+             releasename="${release.version}"
+             releasefilename="atac.jar"
+             releasefile="${basedir}/atac.jar"
+             releasenotes="${release.notes}"
+             releasechanges="${release.changes}"/>
+
+  </target>
+
+</project>

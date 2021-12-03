@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<project name="Extended Build" default="Make ATAC-EXTENDED" basedir="..">
+
+  <target name="Make ATAC-EXTENDED" description="Generate distribution jar">
+    <property name="make.dir" value="tmp/MakeDir"/>
+
+    <delete dir="${make.dir}" failonerror="false"/>
+    <mkdir dir="${make.dir}"/>
+
+    <!--<unzip dest="${make.dir}">-->
+      <!--<fileset dir="../lib">-->
+        <!--<include name="ant/*.jar"/>-->
+      <!--</fileset>-->
+      <!--<fileset dir="lib">-->
+        <!--<include name="*.jar"/>-->
+        <!--<include name="gforge-java-cli/apps/gforge-java-cli.jar"/>-->
+      <!--</fileset>-->
+    <!--</unzip>-->
+
+      <unjar src="lib/davexplorer-0.91.jar" dest="${make.dir}"/>
+
+    <copy todir="${make.dir}">
+      <fileset dir="../classes/production/EXTENDED"/>
+      <fileset dir="lib/gforge-java-cli/lib">
+        <exclude name="META-INF/*"/>
+        <include name="**/*"/>
+      </fileset>
+    </copy>
+
+    <jar jarfile="atac-extended.jar" basedir="${make.dir}"/>
+
+    <!--<delete dir="${make.dir}" failonerror="false"/>-->
+
+  </target>
+
+</project>

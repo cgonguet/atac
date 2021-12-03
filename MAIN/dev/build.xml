@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<project name="Main Build" default="Make ATAC-MAIN" basedir="..">
+
+  <target name="Make ATAC-MAIN" description="Generate distribution jar">
+    <property  name="make.dir" value="tmp/MakeDir"/>
+    <delete dir="${make.dir}" failonerror="false"/>
+    <mkdir dir="${make.dir}"/>
+
+    <unzip dest="${make.dir}">
+      <fileset dir="../lib">
+        <include name="ant/*.jar"/>
+        <include name="*.jar"/>
+      </fileset>
+    </unzip>
+
+    <copy todir="${make.dir}">
+      <fileset dir="../classes/production/MAIN"/>
+    </copy>
+
+    <jar jarfile="atac.jar" basedir="${make.dir}"/>
+
+    <delete dir="${make.dir}" failonerror="false"/>
+
+  </target>
+
+</project>

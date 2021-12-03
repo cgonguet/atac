@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+
+<project name="Extended Test" default="Test Findbugs" basedir="..">
+
+    <taskdef resource="org/atac/ant/antlib.xml" classpath="${basedir}/atac-extended.jar"/>
+    <taskdef resource="org/atac/ant/antlib.xml" classpath="${basedir}/../MAIN/atac.jar"/>
+
+    <target name="Test Comm WebDav">
+        <property name="tmp.file" value="tmp/test_webdav.html"/>
+
+        <mkdir dir="tmp/TEST_WEBDAV"/>
+        <mkdir dir="tmp/TEST_WEBDAV/IN"/>
+        <mkdir dir="tmp/TEST_WEBDAV/OUT"/>
+        <tstamp>
+            <format property="today.timestamp" pattern="yyyy-MM-dd hh:mm:ss"/>
+        </tstamp>
+        <echo file="tmp/TEST_WEBDAV/test.html">TEST 0 at ${today.timestamp}</echo>
+        <echo file="tmp/TEST_WEBDAV/IN/test1.html">TEST 1 at ${today.timestamp}</echo>
+
+        <webdav basedir="groups/atac/">
+            <putdir local="tmp/TEST_WEBDAV/IN" remote="TestWebdavDir"/>
+            <getfile local="tmp/TEST_WEBDAV/OUT/test1.html" remote="TestWebdavDir/test1.html"/>
+            <putfile local="tmp/TEST_WEBDAV/test.html" remote="TestWebdavDir/test.html"/>
+            <getfile local="tmp/TEST_WEBDAV/OUT/test.html" remote="TestWebdavDir/test.html"/>
+        </webdav>
+
+        <loadfile srcfile="tmp/TEST_WEBDAV/OUT/test.html" property="file.content"/>
+        <echo>
+            test.html: ${file.content}
+        </echo>
+
+        <loadfile srcfile="tmp/TEST_WEBDAV/OUT/test1.html" property="file1.content"/>
+        <echo>
+            test1.html: ${file1.content}
+        </echo>
+
+        <delete dir="tmp/TEST_WEBDAV"/>
+    </target>
+
+   <target name="Test Findbugs">
+    <!--<taskdef name="findbugs"-->
+    <!--classpath="classes/production/ATAC" classname="org.atac.ant.misc.FindbugsDisplayTask" />-->
+    <!--<findbugs file="resources/test/findbugs.xml" property="findbugs.result"/>-->
+    <!--<echo>${findbugs.result}</echo>-->
+
+    <findbugs file="resources/test/findbugs.xml"/>
+
+  </target>
+
+  <target name="Test Acos FRS">
+    <property file="${user.home}/private.properties"/>
+    <acosfrsget userid="${acos.username}"
+             password="${acos.password}"
+             group="atac"
+             releasepackage="TEST"
+             property="last.release"
+             last="true"/>
+    <echo>
+    Last Release: ${last.release}
+    </echo>
+
+    <gui title="Create new ATAC:TEST release" vgap="10" fontName="fixed" size="300x150">
+      <gintext focus="true" label="Version: " text="${last.release}" property="release.version"/>
+      <gintext label="Notes  : " text="release"  property="release.notes"/>
+      <gintext label="Changes: " text="changes"  property="release.changes"/>
+    </gui>
+
+    <delete file="tmp/release_note.txt" failonerror="false"/>
+    <echo file="tmp/release_note.txt">
+      Version: ${release.version}
+      Release note:
+      ${release.notes}
+      Changes:
+      ${release.changes}
+    </echo>
+
+     <acosfrs userid="${acos.username}"
+             password="${acos.password}"
+             group="atac"
+             releasepackage="TEST"
+             releasename="${release.version}"
+             releasefilename="release_note.txt"
+             releasefile="tmp/release_note.txt"
+             releasenotes="${release.notes}"
+             releasechanges="${release.changes}"/>
+
+
+    <acosfrsget userid="${acos.username}"
+             password="${acos.password}"
+             group="atac"
+             releasepackage="TEST"
+             property="last.release"
+             last="true"/>
+    <echo>
+   Last release is now: ${last.release}
+    </echo>
+
+  </target>
+
+  <target name="Test Acos FRS GET">
+
+    <property file="${user.home}/private.properties"/>
+    <acosfrsget userid="${acos.username}"
+             password="${acos.password}"
+             group="atac"
+             releasepackage="TEST"
+             property="all.releases"
+             last="false"/>
+    <acosfrsget userid="${acos.username}"
+             password="${acos.password}"
+             group="atac"
+             releasepackage="TEST"
+             property="last.release"
+             last="true"/>
+    <echo>
+      All Releases: ${all.releases}
+      Last Release: ${last.release}
+    </echo>
+
+  </target>
+</project>

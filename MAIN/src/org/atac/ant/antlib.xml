@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<antlib>
+
+  <taskdef name="grep" classname="org.atac.ant.text.GrepTask"/>
+  <taskdef name="replaceall" classname="org.atac.ant.text.ReplaceAllTask"/>
+  <taskdef name="extract" classname="org.atac.ant.text.ExtractTask"/>
+
+  <taskdef name="gui" classname="org.atac.ant.gui.GuiAggregatorTask"/>
+  <typedef name="gintext" classname="org.atac.ant.gui.elements.input.TextInputElement"/>
+  <typedef name="ginfile" classname="org.atac.ant.gui.elements.input.FileChooserInputElement"/>
+  <typedef name="ginlist" classname="org.atac.ant.gui.elements.input.ListInputElement"/>
+  <typedef name="glabel" classname="org.atac.ant.gui.elements.LabelElement"/>
+  <typedef name="gtext" classname="org.atac.ant.gui.elements.TextElement"/>
+  <typedef name="gseparator" classname="org.atac.ant.gui.elements.SeparatorElement"/>
+  <typedef name="gspare" classname="org.atac.ant.gui.elements.SpareElement"/>
+  <typedef name="gfileeditor" classname="org.atac.ant.gui.elements.FileEditorElement"/>
+  <typedef name="gtab" classname="org.atac.ant.gui.elements.TabElement"/>
+  <typedef name="gconsole" classname="org.atac.ant.gui.elements.ConsoleElement"/>
+
+  <taskdef name="ssh" classname="org.atac.ant.comm.ssh.SshTask"/>
+  <typedef name="execcmd" classname="org.atac.ant.comm.ssh.ExecChannel"/>
+  <typedef name="sftpcmd" classname="org.atac.ant.comm.ssh.SftpChannel"/>
+  
+  <taskdef name="unix2dos" classname="org.atac.ant.misc.Unix2DosTask"/>
+
+</antlib>

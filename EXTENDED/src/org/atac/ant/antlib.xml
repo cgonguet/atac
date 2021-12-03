@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<antlib>
+
+  <taskdef name="webdav" classname="org.atac.ant.comm.webdav.WebdavTask"/>
+  <typedef name="putdir" classname="org.atac.ant.comm.webdav.WebdavCmdPutDir"/>
+  <typedef name="putfile" classname="org.atac.ant.comm.webdav.WebdavCmdPutFile"/>
+  <typedef name="getfile" classname="org.atac.ant.comm.webdav.WebdavCmdGetFile"/>
+
+  <taskdef name="acosfrs" classname="org.atac.ant.comm.frs.AcosFRSCreateTask"/>
+  <taskdef name="acosfrsget" classname="org.atac.ant.comm.frs.AcosFRSGetReleasesTask"/>
+
+  <taskdef name="findbugs" classname="org.atac.ant.misc.FindbugsDisplayTask"/>
+
+</antlib>

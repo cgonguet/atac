@@ -1,0 +1,324 @@
+<?xml version="1.0"?>
+
+<project name="Main Test" default="Test Gui GuiAggregator" basedir="..">
+
+  <taskdef resource="org/atac/ant/antlib.xml" classpath="${basedir}/atac.jar"/>
+
+  <target name="Test Misc Unix2Dos">
+    <property name="test.dir" value="tmp/TEST_DOS2UNIX"/>
+    <delete dir="${test.dir}" failonerror="false"/>
+    <touch mkdirs="true" file="${test.dir}/a.txt"/>
+    <echo file="${test.dir}/example.txt">
+      bidibou
+      bidiba
+      tadoum
+    </echo>
+    <exec executable="dos2unix">
+      <arg value="${test.dir}/example.txt"/>
+    </exec>
+    <touch mkdirs="true" file="${test.dir}/b.txt"/>
+    <touch mkdirs="true" file="${test.dir}/A/aa.txt"/>
+    <touch mkdirs="true" file="${test.dir}/A/ab.txt"/>
+    <touch mkdirs="true" file="${test.dir}/A/AA/aaa.txt"/>
+    <touch mkdirs="true" file="${test.dir}/A/AB/aba.txt"/>
+    <touch mkdirs="true" file="${test.dir}/donotvisit.nottxt"/>
+    <unix2dos>
+      <fileset dir="${test.dir}">
+        <include name="**/*.txt"/>
+      </fileset>
+    </unix2dos>
+    <delete dir="${test.dir}"/>
+
+  </target>
+
+  <target name="Test Text Replace">
+    <property name="test.input" value="org.atac.anttext.ReplaceTask"/>
+
+    <replaceall value="${test.input}" regexp="\." replacement="/" property="test.result"/>
+    <echo>
+      INPUT : ${test.input}
+      RESULT: ${test.result}
+    </echo>
+  </target>
+
+  <target name="Test Text Extract">
+    <property name="tmp.file" value="tmp/test_extract.txt"/>
+    <echo file="${tmp.file}">
+      startsection 1 name=section_1 description=desc_for_section_1
+      action 11
+      line 111
+      line 112
+      endaction 11
+      action 12
+      line 121
+      line 122
+      endaction 12
+      endsection 1
+      startsection 2
+      action 21
+      line 211
+      line 212
+      endaction 21
+      action 22
+      line 221
+      line 222
+      endaction 22
+      endsection 2
+    </echo>
+
+    <echo>
+      startsection 1 name=section_1 description=desc_for_section_1
+      action 11
+      line 111
+      line 112
+      endaction 11
+      action 12
+      line 121
+      line 122
+      endaction 12
+      endsection 1
+      startsection 2
+      action 21
+      line 211
+      line 212
+      endaction 21
+      action 22
+      line 221
+      line 222
+      endaction 22
+      endsection 2
+    </echo>
+
+    <echo>==== TEST 1</echo>
+    <extract file="${tmp.file}"
+             property="extract.result"
+             from='[ \t]*startsection.+'
+             to='[ \t]*endsection.*'
+             keep="1"
+             includelimits="true"/>
+    <echo>${extract.result}</echo>
+
+    <echo>==== TEST 2</echo>
+    <extract file="${tmp.file}"
+             property="extract.all.actions"
+             from='[ \t]*action.+'
+             to='[ \t]*endaction.*'
+             keep="3"
+             includelimits="false"
+             separator="__NEWLINE__  This is a new action: __NEWLINE__"/>
+    <echo>${extract.all.actions}</echo>
+
+    <delete file="${tmp.file}"/>
+
+  </target>
+
+  <target name="Test Text Extract XML">
+    <property name="tmp.file" value="tmp/test_extract.txt"/>
+    <echo file="${tmp.file}">
+      &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+      &lt;models version=&quot;OAM&quot; OAMRelease=&quot;OAM&quot;&gt;
+
+      &lt;network&gt;
+      &lt;component modelName=&quot;OAM&quot; modelRelease=&quot;OAM&quot; type=&quot;earth&quot;/&gt;
+      &lt;component modelName=&quot;RNC&quot; modelRelease=&quot;07_01_00&quot; type=&quot;RNC&quot;/&gt;
+      &lt;/network&gt;
+
+      &lt;parent modelName=&quot;OAM&quot; modelRelease=&quot;OAM&quot; type=&quot;earth&quot;&gt;
+      &lt;component modelName=&quot;forest&quot; modelRelease=&quot;01_02_00&quot; type=&quot;forest&quot;/&gt;
+      &lt;component modelName=&quot;garden&quot; modelRelease=&quot;05_03_00&quot; type=&quot;garden&quot;/&gt;
+      &lt;/parent&gt;
+
+      &lt;parent modelName=&quot;RNC&quot; modelRelease=&quot;07_01_00&quot; type=&quot;RNC/RNCEquipment&quot;&gt;
+      &lt;component modelName=&quot;OAM&quot; modelRelease=&quot;OAM&quot; type=&quot;INodeA&quot;/&gt;
+      &lt;/parent&gt;
+
+      &lt;parent modelName=&quot;OAM&quot; modelRelease=&quot;OAM&quot; type=&quot;INodeA&quot;&gt;
+      &lt;component modelName=&quot;Module&quot; modelRelease=&quot;08_00_00&quot; type=&quot;Module&quot;/&gt;
+      &lt;/parent&gt;
+
+      &lt;/models&gt;
+    </echo>
+
+
+    <echo>==== TEST 1</echo>
+    <extract file="${tmp.file}"
+             property="extract.result"
+             from='[ \t]*&lt;models.+'
+             to='[ \t]*&lt;/models.+'
+             keep="1"
+             includelimits="false"/>
+
+    <echo>${extract.result}</echo>
+
+    <delete file="${tmp.file}"/>
+
+  </target>
+
+  <target name="Test Text Grep">
+    <property name="tmp.file" value="tmp/test_grep.txt"/>
+    <echo file="${tmp.file}">
+      blabla
+      CRi 00012345.89 pipotron
+      blablabla
+      CRI AZERTY
+      CRI 0123456.9087 yahoo
+      CRI 667788.0
+      CRi: 1234.123 shouldbefound
+      the end
+    </echo>
+
+    <echo>==== TEST 1</echo>
+    <grep file="${tmp.file}" property="cri"
+          regexp='.*CR[iI].*'/>
+    <echo>Result = ${cri}</echo>
+
+    <echo>==== TEST 2</echo>
+    <grep file="${tmp.file}" property="cri"
+          regexp='.*CR[iI] ([0-9]+\.[0-9]+) (.*)'/>
+    <echo>Result all line = ${cri}</echo>
+    <echo>Result first arg = ${cri.0}</echo>
+    <echo>Result second arg = ${cri.1}</echo>
+
+
+    <echo>==== TEST 3</echo>
+    <grep file="${tmp.file}" property="cri"
+          regexp='.*CR[iI] ([0-9]+\.[0-9]+).*'
+          tolist=","/>
+    <echo>List of CRI found = ${cri.0}</echo>
+
+    <echo>==== TEST 4</echo>
+    <grep file="${tmp.file}" property="cri"
+          regexp='.*CR[iI]:* ([0-9]+\.[0-9]+) (.*)'
+          tolist=","/>
+    <echo>List of CRI found = ${cri.0}</echo>
+    <echo>List of CRI comment found = ${cri.1}</echo>
+
+    <delete file="${tmp.file}"/>
+  </target>
+
+  <target name="Test Comm SSH">
+
+    <property name="remote.server" value="frvilw0f06673.fr.alcatel-lucent.com"/>
+    <property name="remote.user" value="cpfemto"/>
+    <property name="remote.password" value="556Dyt91"/>
+
+    <ssh server="${remote.server}"
+         userid="${remote.user}"
+         password="${remote.password}">
+      <execcmd failonerror="true" trace="true">
+        echo --- START CHANNEL
+        echo --- LIST FILES IN BIN
+        cd bin ; ls
+        echo --- PRINT DATE
+        date
+        echo --- PLAY WITH VAR
+        setenv ANEWENVVAR this_is_my_new_env_var
+        echo $ANEWENVVAR
+        echo --- END CHANNEL
+      </execcmd>
+      <execcmd failonerror="true" timeout="5">
+        echo --- START CHANNEL
+        echo --- SLEEP 3s ...
+        sleep 3
+        echo --- END CHANNEL
+      </execcmd>
+      <execcmd failonerror="true" timeout="10">
+
+        echo --- START CHANNEL
+        echo "this a new channel \!"
+        echo --- END CHANNEL
+
+      </execcmd>
+    </ssh>
+  </target>
+
+  <target name="Test Comm Sftp">
+
+    <property name="tmp.sftp.file" value="tmp/test_ant_sftp.txt"/>
+    <echo file="${tmp.file}">TEST SFTP FILE CONTENT</echo>
+
+    <property name="remote.server" value="172.27.154.81"/>
+    <property name="remote.user" value="root"/>
+    <property name="remote.password" value="alcatel01"/>
+
+    <ssh server="${remote.server}"
+         userid="${remote.user}"
+         password="${remote.password}">
+      <sftpcmd failonerror="true" trace="true"
+               local="${tmp.sftp.file}" remote="/tmp/test_ant_sftp.txt" action="put"/>
+      <sftpcmd failonerror="true" trace="true"
+               remote="/tmp/test_ant_sftp.txt" local="${tmp.sftp.file}" action="get"/>
+    </ssh>
+
+    <loadfile srcfile="${tmp.sftp.file}" property="file.content"/>
+    <echo>
+      GET by SFTP:
+      ${file.content}
+    </echo>
+  </target>
+
+
+  <target name="Test Gui GuiAggregator">
+
+    <gui title="Test GUI Aggregator" vgap="10" fontSize="16">
+      <glabel text="Welcome to GUI Aggregator !" alignment="center" fontStyle="bold-italic" fontSize="24"/>
+      <gseparator/>
+      <gintext focus="true" label="Choose a text value: " text="AAAAAAA" property="test.result.text"/>
+      <gspare/>
+      <glabel text="Right label" alignment="right"/>
+      <gspare/>
+      <glabel text="---- This is a label ---"/>
+      <ginfile label="Choose a file: "
+               file="test/data/fileForEditor.txt"
+               property="test.result.file"
+               type="both" filter="jar,xml"/>
+      <gseparator/>
+      <ginlist focus="true" label="choose in the list: " listing="AA,BB,CC,DD" current="BB"
+               property="test.result.list"/>
+    </gui>
+
+    <echo>
+      RESULTS:
+      Text: ${test.result.text}
+      File: ${test.result.file}
+      List: ${test.result.list}
+    </echo>
+  </target>
+
+  <target name="Test Gui GuiAggregator with File">
+
+    <property name="tmp.file" value="tmp/tmp_guiaggregator.txt"/>
+    <echo file="${tmp.file}">
+      blabla
+      CRi 00012345.89 pipotron
+      blablabla
+      CRI AZERTY
+      CRI 0123456.9087 yahoo
+      CRI 667788.0
+      CRi: 1234.123 shouldbefound
+      the end
+    </echo>
+    <loadfile srcfile="${tmp.file}" property="file.content.before"/>
+
+    <gui title="CRIs info" vgap="20" size="400x500" failoncancel="false" fontStyle="plain">
+      <glabel alignment="center"
+              text="Info for CRIs found in changes.xml"/>
+      <gtext text="${file.content.before}" label="This is the text" fontName="courier"/>
+      <gintext label="Enter CRIs to deliver: "
+               text="here are the CRIs"
+               property="result"
+               focus="false"/>
+      <gfileeditor label="Editor for ${tmp.file}" file="${tmp.file}" focus="true"
+                   fontName="courier" fontSize="16"/>
+    </gui>
+    <echo>Result: ${result}</echo>
+
+    <loadfile srcfile="${tmp.file}" property="file.content.after"/>
+    <echo>The file content is:
+      ${file.content.after}
+    </echo>
+
+    <delete file="${tmp.file}"/>
+  </target>
+
+</project>
